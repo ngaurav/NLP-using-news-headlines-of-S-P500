@@ -40,12 +40,12 @@ def genData():
     #dataFileNumber = dataHist['data_file_number'] + 1
 
     #dataFile = open('data/dat_' + dataFileNumber + '.csv', 'a')
-    dataFile = open('data/dat_0.csv', 'a')
+    dataFile = open('data/dat_9.csv', 'a')
     csvWriter = csv.writer(dataFile)
     #date = dateHist['last_updated']
     #endDate = datetime.date.today()
-    date = datetime.datetime.strptime('29082013', "%d%m%Y").date()
-    endDate = datetime.datetime.strptime('29082017', "%d%m%Y").date()
+    date = datetime.datetime.strptime('27012014', "%d%m%Y").date()
+    endDate = datetime.datetime.strptime('01012017', "%d%m%Y").date()
 
     c = csv.reader(open('dict.csv','r'))
     dic = {}
@@ -68,8 +68,10 @@ def genData():
             stockdata = getStockData(dic[row[0]], date)
             if(stockdata == -1):
                 continue
-            t = u''
-            pos, neg = sentiment.analyzeText(t.join(row[1:]))
+            t = ''
+            news = t.join(row[1:])
+            #print (news)
+            pos, neg = sentiment.analyzeText(news)
 
             data = []
             data.extend((row[0], date.timetuple().tm_yday))
